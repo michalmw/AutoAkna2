@@ -1,0 +1,32 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">AutoAkna</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <!--<li><a href="#">Link </a></li>-->
+        <li><a href="#">Główna Strona</a></li>
+        <li class="dropdown" dropdown [(isOpen)]="status.isopen">
+          <a dropdownToggle href="#" class="dropdown-toggle" >Instruktorzy <span class="caret"></span></a>
+          <ul class="dropdown-menu" dropdownMenu role="menu" aria-labelledby="single-button">
+            <li><a [routerLink]="['/users']" href="">Lista instruktorów</a></li>
+            <li><a [routerLink]="['/add-user']" href="">Dodaj instruktora</a></li>
+            <li><a [routerLink]="['/inspektorat']" href="">Inspektoraty</a></li>
+          </ul>
+        </li>
+         <li class="dropdown" dropdown [(isOpen)]="status.isopenCourses">
+          <a id="simple-courses" dropdownToggle href="#" class="dropdown-toggle" >Kursy <span class="caret"></span></a>
+          <ul class="dropdown-menu" dropdownMenu role="menu" aria-labelledby="single-courses">
+            <li><a [routerLink]="['/courses']" href="">Lista kursów</a></li>
+            <li><a [routerLink]="['/courses-add']" href="">Dodaj kurs</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a [routerLink]="['/login']" *ngIf="!loginService.isLoggedIn">Zaloguj</a></li>
+        <li><a [routerLink]="['/login']" *ngIf="loginService.isLoggedIn">Panel Uzytkownika</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

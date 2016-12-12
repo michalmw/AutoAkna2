@@ -1,0 +1,125 @@
+<div class="col-md-12 jumbotron">
+  
+  <form (ngSubmit)="add(form.value)" #form="ngForm" *ngIf="course">
+  <h3 *ngIf="!isEditAble">Dodaj Kurs</h3>
+  <h3 *ngIf="isEditAble">Edytuj Kurs
+    <small *ngIf="course.number">nr. {{course.number}}/{{course.numberYear}}/{{course.type}}</small>
+  </h3>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="control-label col-md-2">Rodzaj</label>
+        <div class="col-md-10">
+          <select class="form-control" name="type" id="" [(ngModel)]="course.type">
+            <option value="KPPP">KPPP</option>
+            <option value="SKPP">SKPP</option>
+            <option value="16h">16h KPP</option>
+            <option value="WKPP">WKPP</option>
+          </select>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="">Data kursu <small>1 weekend - start</small></label>
+        <div class="col-md-10">
+          <input type="date" name="dateFirstStart" class="form-control" [(ngModel)]="course.dateFirstStart">
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="">Data kursu <small>1 weekend - koniec</small></label>
+        <div class="col-md-10">
+          <input type="date" name="dateFirstEnd" class="form-control" [(ngModel)]="course.dateFirstEnd">
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="">Data kursu <small>2 weekend - start</small></label>
+        <div class="col-md-10">
+          <input type="date" name="deteSecondStart" class="form-control" [(ngModel)]="course.deteSecondStart">
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="">Data kursu <small>2 weekend - koniec</small></label>
+        <div class="col-md-10">
+          <input type="date" name="deteSecondEnd" class="form-control" [(ngModel)]="course.dateSecondEnd">
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="">Liczba uczesnitków</label>
+        <div class="col-md-10">
+          <input type="number"  name="numberUser" class="form-control"  [(ngModel)]="course.numberUser">
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="">Szef szkolenia</label>
+        <div class="col-md-10">
+          <select name="chef" class="form-control" [(ngModel)]="course.chef">
+            <option value=""></option>
+            <option  *ngFor="let user of users" [value]="user._id">{{user.name}} {{user.surname}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      
+      <div class="form-group" *ngIf="users">
+        <label class="col-md-2 control-label" for="">Instruktorzy <small>z ctrl ;-)</small></label>
+        <div class="col-md-10">
+          <select name="instructors" class="form-control" multiple="true" [(ngModel)]="course.instructors">
+            <option  *ngFor="let user of users" [value]="user._id">{{user.name}} {{user.surname}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" *ngIf="isEditAble">
+        <label class="col-md-2 control-label" for="">Status kursu </label>
+        <div class="col-md-10">
+          <select name="status" class="form-control"  [(ngModel)]="course.status">
+            <optgroup label="Przed zatwierdzeniem" *ngIf="isCorrectStatus()">
+              <option value="roboczy">Roboczy</option>
+              <option value="zgłoszony">Zgłoszony</option>
+              <option value="odrzucony">Odrzucony</option>
+              <option value="poprawiony">Poprawiony</option>
+            </optgroup>
+            <optgroup label="Po zatwierdzeniu">
+              <option value="zatwierdzony">Zatwierdzony</option>
+              <option value="zmieniony">Zmieniony</option>
+              <option value="zakończony">Zakończony</option>
+              <option value="odwołany">Odwołany</option>
+            </optgroup>
+            
+          </select>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="">Miejsce Kursu</label>
+        <div class="col-md-10">
+          <textarea name="place" id="" cols="30" rows="10" class="form-control" [(ngModel)]="course.place"></textarea>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="">Organizator</label>
+        <div class="col-md-10">
+          <textarea name="organizer" id="" cols="30" rows="10" class="form-control" [(ngModel)]="course.organizer"></textarea>
+        </div>
+      </div>
+    </div>
+    <button *ngIf="!isEditAble" type="submit" class="btn btn-raised btn-primary pull-right">Dodaj </button>
+    <button *ngIf="isEditAble" type="submit" class="btn btn-raised btn-primary pull-right">Zapisz zmiany </button>
+  </form>
+</div>
+

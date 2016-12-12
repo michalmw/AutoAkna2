@@ -1,0 +1,39 @@
+<h3>Lista instruktorów</h3>
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <td>Typ</td>
+      <td>Status</td>
+      <td>Numer</td>
+      <td>Szef szkolenia</td>
+      <td>Data Rozpoczęcia</td>
+      <td>Miejsce</td>
+    </tr>
+  </thead>
+  <tbody *ngIf="users">
+    <tr *ngFor="let course of courses" >
+      <td>
+          {{course.type}}
+      </td>
+      <td>
+        {{course.status}}
+      </td>
+      <td>
+        <a href="" [routerLink]="['/courses', course._id]">
+          {{course.number || '??'}}/{{course.numberYear || '??'}}/{{course.type}}
+        </a>
+        
+        
+      </td>
+      <td>
+        {{checkSomethink(course.chef)}}
+      </td>
+      <td>
+        {{course.dateFirstStart}}
+      </td>
+      <td>
+       {{course.place}}
+      </td>
+    </tr>
+  </tbody>
+</table>

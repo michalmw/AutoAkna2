@@ -1,0 +1,5 @@
+<div class="well">
+  <h3>Logowanie</h3>
+    <button (click)="login()"  *ngIf="!loginService.isLoggedIn">Login</button>
+    <button (click)="logout()" *ngIf="loginService.isLoggedIn">Logout</button>
+</div>

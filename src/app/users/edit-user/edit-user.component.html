@@ -1,0 +1,145 @@
+<div class="col-md-12 jumbotron">
+
+  <form (ngSubmit)="edit(form.value)" #form="ngForm" *ngIf="user"  class="form-horizontal">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="col-md-2 control-label">Login</label>
+        <div class="col-md-10">
+          <input [(ngModel)]="user.user" name="user" placeholde="Login" type="email" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label" >Hasło </label>
+        <div class="col-md-10">
+          <input [(ngModel)]="user.password" name="password" placeholde="Hasło" type="password" class="form-control" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Imie</label>
+        <div class="col-md-10">
+          <input [(ngModel)]="user.name" name="name" placeholde="Imie" type="text" class="form-control" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Nazwisko</label>
+        <div class="col-md-10">
+          <input [(ngModel)]="user.surname" name="surname" placeholde="Nazwisko" type="text" class="form-control" >
+        </div>
+      </div>
+       <div class="form-group">
+        <label class="col-md-2 control-label">Stopień Instruktorski</label>
+        <div class="col-md-10">
+          <select name="zhpclass" [(ngModel)]="user.zhpclass"  class="form-control">
+            <option value=""></option>
+            <option value="bez stopnia">Bez stopnia</option>
+            <option value="pwd">Przewodnik</option>
+            <option value="phm">Podharcmistrz</option>
+            <option value="hm">Harcmistrz</option>
+          </select>
+        </div>
+      </div>
+       <div class="form-group">
+        <label class="col-md-2 control-label">Adres</label>
+        <div class="col-md-10">
+          <textarea name="address" [(ngModel)]="user.address" id="" cols="10" rows="2" class="form-control"></textarea>
+        </div>
+      </div>
+       <div class="form-group">
+        <label class="col-md-2 control-label">O sobie</label>
+        <div class="col-md-10">
+          <textarea name="about" [(ngModel)]="user.about" id="" cols="10" rows="2" class="form-control"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="telephone" class="col-md-2 control-label">Telefon</label>
+        <div class="col-md-5">
+          <input [(ngModel)]="user.telephone" name="telephone" placeholde="Telefon" type="text" class="form-control" >
+        </div>
+        <div class="col-md-4">
+            <div class="togglebutton">
+              <label style="font-size: 12px;">
+                <input type="checkbox" [checked]="user.telephoneAble" name="telephoneAble" [(ngModel)]="user.telephoneAble" ><span class="toggle"></span> Widoczny?
+              </label>
+            </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Klasa</label>
+        <div class="col-md-10">
+          <select name="class"  id="" [(ngModel)]="user.class" class="form-control">
+            <option value="C">Klasa C</option>
+            <option value="B">Klasa B</option>
+            <option value="A">Klasa A</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="inspektoraty">
+        <label  class="control-label col-md-2">Inspektorat</label>
+        <div class="col-md-10">
+          <select [(ngModel)]="user.inspektorat" name="inspektorat" id="" class="form-control">
+            <option value=""></option>
+            <option *ngFor="let insp of inspektoraty" [value]="insp._id">{{insp.name}}</option>
+          </select>
+        </div>
+      </div>
+       <div class="form-group">
+        <label class="col-md-2 control-label">Numer odznaki</label>
+        <div class="col-md-10">
+          <input [(ngModel)]="user.classNumber" name="classNumber" placeholde="Nazwisko" type="text" class="form-control" >
+        </div>
+      </div>
+       <div class="form-group">
+        <label class="col-md-2 control-label">Rok kursu</label>
+        <div class="col-md-10">
+          <select name="classDate"  id="" [(ngModel)]="user.classDate" class="form-control">
+            <option value=""></option>
+            <option value="2010/lato">2010/lato</option>
+            <option value="2010/zima">2010/zima</option>
+            <option value="2011/lato">2011/lato</option>
+            <option value="2011/zima">2011/zima</option>
+            <option value="2012/lato">2012/lato</option>
+            <option value="2012/zima">2012/zima</option>
+            <option value="2013/lato">2013/lato</option>
+            <option value="2013/zima">2013/zima</option>
+            <option value="2014/lato">2014/lato</option>
+            <option value="2014/zima">2014/zima</option>
+            <option value="2015/lato">2015/lato</option>
+            <option value="2015/zima">2015/zima</option>
+            <option value="2016/lato">2016/lato</option>
+            <option value="2016/zima">2016/zima</option>
+            <option value="2017/lato">2017/lato</option>
+            <option value="2017/zima">2017/zima</option>
+            <option value="2018/lato">2018/lato</option>
+            <option value="2018/zima">2018/zima</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Status weryfikacji</label>
+        <div class="col-md-10">
+          <select name="veryfication"  id="" [(ngModel)]="user.veryfication" class="form-control">
+            <option value=""></option>
+            <option value="brak">brak</option>
+            <option value="pełna">pełna</option>
+            <option value="warunkowa">warunkowa</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Status instruktora</label>
+        <div class="col-md-10">
+          <select name="status"  id="" [(ngModel)]="user.status" class="form-control">
+            <option value=""></option>
+            <option value="aktywny">aktywny</option>
+            <option value="nie aktywny">nie aktywny</option>
+          </select>
+        </div>
+      </div>
+     
+    </div>
+    <div class="clearfix"></div>
+    <button type="submit" class="btn btn-raised btn-primary pull-right">Zapisz</button>
+  </form>
+</div>
