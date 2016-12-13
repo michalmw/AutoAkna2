@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoursesAddComponent } from './course.component';
+import { CourseComponent } from './course.component';
+import { ChefPipe } from './chef.pipe';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [CoursesAddComponent]
+  declarations: [CourseComponent, ChefPipe]
 })
 export class CoursesAddModule { }

@@ -25,6 +25,7 @@ import { CoursesService } from './courses/courses.service';
 
 import './rxjs-extensions';
 
+import { ChefPipe } from './courses/course/chef.pipe';
 
 
 
@@ -35,7 +36,8 @@ import './rxjs-extensions';
   declarations: [
     AppComponent,
     HeaderNavbarComponent,
-    routableComponents
+    routableComponents,
+    ChefPipe
   ],
   imports: [
     AlertModule,  

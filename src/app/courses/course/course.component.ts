@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CoursesService } from '../courses.service'
 import { UsersService } from '../../users/users.service'
 
+
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
