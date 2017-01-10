@@ -76,25 +76,40 @@ export class CourseComponent implements OnInit {
   }
 
   add(course: Courses) {
-    if(this.isEditAble) {
 
-      //check is zatwierdzony==status
-      if(course.status == 'zatwierdzony' && !course.number)
-        this.addNumberCourse(course)
-      else
-        this.updateCourse(course)
-
-
+    //Step 1
+    // Date Validation
+    let dateValidation = this.dateValidation(course);
+    if(dateValidation) {
+      if(course.numberUser) {
+        let isValid = this.checkValidationNumberUser(course.numberUser, course.instructors);
+        if(isValid.status === true) {
+           if(this.isEditAble) {
+               //check is zatwierdzony==status
+              if(course.status == 'zatwierdzony' && !course.number)
+                this.addNumberCourse(course)
+              else
+                this.updateCourse(course)
+          } else {
+            course.status = 'Roboczy';
+              this.coursesService
+                .addCourse(course)
+                .subscribe(
+                  resUser => this.router.navigateByUrl('/courses'),
+                  error => this.errorMessage = <any>error
+                )
+          }
+        } else
+          alert('Za mało instruktorów na taką licze uczestników');
+      }
     } else {
+      alert('Coś nie tak z datą.. Uzupełnij ją prawidłowo.');
 
-      course.status = 'Roboczy';
-        this.coursesService
-          .addCourse(course)
-          .subscribe(
-            resUser => this.router.navigateByUrl('/courses'),
-            error => this.errorMessage = <any>error
-          )
     }
+
+
+
+      
     
   }
 
@@ -121,6 +136,49 @@ export class CourseComponent implements OnInit {
       )
   }
 
+
+  dateValidation(course: Courses) {
+    if(course.type == '16h') {
+      if(new Date(course.dateFirstEnd) > new Date(course.dateFirstStart))
+        return true;
+      else
+        return false;
+    } else if(course.type == 'WKPP') {
+        let dateStart = new Date(course.dateFirstStart);
+        let newStartDate = new Date(course.dateFirstStart);
+        newStartDate.setDate(newStartDate.getDate() + 3);
+        let dateEnd = new Date(course.dateFirstEnd);
+
+        let dateTwoStart = new Date(course.dateSecondEnd);
+        let newStartTwoDate = new Date(course.dateSecondEnd);
+        newStartTwoDate.setDate(newStartTwoDate.getDate() + 3);
+        let dateTwoEnd = new Date(course.dateSecondEnd);
+
+        if(newStartDate >= dateEnd && newStartTwoDate >= dateTwoEnd)
+          return true;
+        else
+          return false;
+    } else if(course.type == '')
+      return false; 
+    else 
+      return true;
+  }
+
+
+  checkValidationNumberUser(usersNumber: number,  instructors: string[]): any {
+    let howManyInstructor = Math.ceil(usersNumber / 6);
+    if(instructors !== undefined) {
+      
+      if(instructors.length >= howManyInstructor)
+        return {'status': true};
+      else
+        return {'status': false, 'number': howManyInstructor};
+      
+    } else {
+      return {'status': false, 'number': howManyInstructor};
+    }
+
+  }
 
 
   isCorrectStatus() {

@@ -2,13 +2,13 @@
 
   <form (ngSubmit)="edit(form.value)" #form="ngForm" *ngIf="user"  class="form-horizontal">
     <div class="col-md-6">
-      <div class="form-group">
+      <div class="form-group" >
         <label class="col-md-2 control-label">Login</label>
         <div class="col-md-10">
-          <input [(ngModel)]="user.user" name="user" placeholde="Login" type="email" class="form-control">
+          <input [(ngModel)]="user.user" name="user" placeholde="Login" type="email" class="form-control" [disabled]="true">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" *ngIf="canSee()">
         <label class="col-md-2 control-label" >Hasło </label>
         <div class="col-md-10">
           <input [(ngModel)]="user.password" name="password" placeholde="Hasło" type="password" class="form-control" >
@@ -17,19 +17,19 @@
       <div class="form-group">
         <label class="col-md-2 control-label">Imie</label>
         <div class="col-md-10">
-          <input [(ngModel)]="user.name" name="name" placeholde="Imie" type="text" class="form-control" >
+          <input [(ngModel)]="user.name" name="name" placeholde="Imie" type="text" class="form-control" [disabled]="canChange()">
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-2 control-label">Nazwisko</label>
         <div class="col-md-10">
-          <input [(ngModel)]="user.surname" name="surname" placeholde="Nazwisko" type="text" class="form-control" >
+          <input [(ngModel)]="user.surname" name="surname" placeholde="Nazwisko" type="text" class="form-control" [disabled]="canChange()">
         </div>
       </div>
        <div class="form-group">
         <label class="col-md-2 control-label">Stopień Instruktorski</label>
         <div class="col-md-10">
-          <select name="zhpclass" [(ngModel)]="user.zhpclass"  class="form-control">
+          <select name="zhpclass" [(ngModel)]="user.zhpclass"  class="form-control" [disabled]="canChange()">
             <option value=""></option>
             <option value="bez stopnia">Bez stopnia</option>
             <option value="pwd">Przewodnik</option>
@@ -41,13 +41,13 @@
        <div class="form-group">
         <label class="col-md-2 control-label">Adres</label>
         <div class="col-md-10">
-          <textarea name="address" [(ngModel)]="user.address" id="" cols="10" rows="2" class="form-control"></textarea>
+          <textarea name="address" [(ngModel)]="user.address" id="" cols="10" rows="2" class="form-control" [disabled]="canChange()"></textarea>
         </div>
       </div>
        <div class="form-group">
         <label class="col-md-2 control-label">O sobie</label>
         <div class="col-md-10">
-          <textarea name="about" [(ngModel)]="user.about" id="" cols="10" rows="2" class="form-control"></textarea>
+          <textarea name="about" [(ngModel)]="user.about" id="" cols="10" rows="2" class="form-control" [disabled]="canChange()"></textarea>
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@
       <div class="form-group">
         <label class="col-md-2 control-label">Klasa</label>
         <div class="col-md-10">
-          <select name="class"  id="" [(ngModel)]="user.class" class="form-control">
+          <select name="class"  id="" [(ngModel)]="user.class" class="form-control" [disabled]="canChange()">
             <option value="C">Klasa C</option>
             <option value="B">Klasa B</option>
             <option value="A">Klasa A</option>
@@ -78,7 +78,7 @@
       <div class="form-group" *ngIf="inspektoraty">
         <label  class="control-label col-md-2">Inspektorat</label>
         <div class="col-md-10">
-          <select [(ngModel)]="user.inspektorat" name="inspektorat" id="" class="form-control">
+          <select [(ngModel)]="user.inspektorat" name="inspektorat" id="" class="form-control" [disabled]="canChange()">
             <option value=""></option>
             <option *ngFor="let insp of inspektoraty" [value]="insp._id">{{insp.name}}</option>
           </select>
@@ -87,13 +87,13 @@
        <div class="form-group">
         <label class="col-md-2 control-label">Numer odznaki</label>
         <div class="col-md-10">
-          <input [(ngModel)]="user.classNumber" name="classNumber" placeholde="Nazwisko" type="text" class="form-control" >
+          <input [(ngModel)]="user.classNumber" name="classNumber" placeholde="Nazwisko" type="text" class="form-control" [disabled]="canChange()">
         </div>
       </div>
        <div class="form-group">
         <label class="col-md-2 control-label">Rok kursu</label>
         <div class="col-md-10">
-          <select name="classDate"  id="" [(ngModel)]="user.classDate" class="form-control">
+          <select name="classDate"  id="" [(ngModel)]="user.classDate" class="form-control" [disabled]="canChange()">
             <option value=""></option>
             <option value="2010/lato">2010/lato</option>
             <option value="2010/zima">2010/zima</option>
@@ -119,7 +119,7 @@
       <div class="form-group">
         <label class="col-md-2 control-label">Status weryfikacji</label>
         <div class="col-md-10">
-          <select name="veryfication"  id="" [(ngModel)]="user.veryfication" class="form-control">
+          <select name="veryfication"  id="" [(ngModel)]="user.veryfication" class="form-control" [disabled]="canChange()">
             <option value=""></option>
             <option value="brak">brak</option>
             <option value="pełna">pełna</option>
@@ -130,16 +130,21 @@
       <div class="form-group">
         <label class="col-md-2 control-label">Status instruktora</label>
         <div class="col-md-10">
-          <select name="status"  id="" [(ngModel)]="user.status" class="form-control">
+          <select name="status"  id="" [(ngModel)]="user.status" class="form-control" [disabled]="canChange()">
             <option value=""></option>
             <option value="aktywny">aktywny</option>
             <option value="nie aktywny">nie aktywny</option>
           </select>
         </div>
       </div>
-     
+       <div class="form-group">
+        <label class="col-md-2 control-label">Hufiec</label>
+        <div class="col-md-10">
+          <input [(ngModel)]="user.hufiec" name="hufiec" placeholde="Hufiec" type="text" class="form-control" [disabled]="canChange()">
+        </div>
+      </div>
     </div>
     <div class="clearfix"></div>
-    <button type="submit" class="btn btn-raised btn-primary pull-right">Zapisz</button>
+    <button *ngIf="canSee()" type="submit" class="btn btn-raised btn-primary pull-right">Zapisz</button>
   </form>
 </div>

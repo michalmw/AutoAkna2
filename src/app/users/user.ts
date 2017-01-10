@@ -15,4 +15,5 @@ export interface User {
     veryfication?: string;
     status?: string;
     about?: string;
+    hufiec?: string;
 }

@@ -26,6 +26,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a [routerLink]="['/login']" *ngIf="!loginService.isLoggedIn">Zaloguj</a></li>
         <li><a [routerLink]="['/login']" *ngIf="loginService.isLoggedIn">Panel Uzytkownika</a></li>
+        <li><a href="#" (click)="logout()" *ngIf="loginService.isLoggedIn">Wyloguj</a></li>
       </ul>
     </div>
   </div>

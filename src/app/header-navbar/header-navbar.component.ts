@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,9 +12,18 @@ export class HeaderNavbarComponent implements OnInit {
 
   public status:{isopen:boolean, isopenCourses: boolean} = {isopen: false, isopenCourses: false};
 
-  constructor(private loginService:LoginService) { }
+  constructor(
+    private loginService:LoginService,
+    private router: Router) { }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.loginService.logout();
+    localStorage.clear();
+    this.router.navigate(['/login']);
+
   }
 
 }

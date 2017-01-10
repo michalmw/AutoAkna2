@@ -10,6 +10,7 @@
         <label class="control-label col-md-2">Rodzaj</label>
         <div class="col-md-10">
           <select class="form-control" name="type" id="" [(ngModel)]="course.type">
+            <option value=""></option>
             <option value="KPPP">KPPP</option>
             <option value="SKPP">SKPP</option>
             <option value="16h">16h KPP</option>
@@ -35,18 +36,18 @@
       </div>
       <div class="clearfix"></div>
       
-      <div class="form-group">
+      <div class="form-group" *ngIf="course.type == 'WKPP'">
         <label class="col-md-2 control-label" for="">Data kursu <small>2 weekend - start</small></label>
         <div class="col-md-10">
-          <input type="date" name="deteSecondStart" class="form-control" [(ngModel)]="course.deteSecondStart">
+          <input type="date" name="dateSecondEnd" class="form-control" [(ngModel)]="course.deteSecondStart">
         </div>
       </div>
       <div class="clearfix"></div>
       
-      <div class="form-group">
+      <div class="form-group" *ngIf="course.type == 'WKPP'">
         <label class="col-md-2 control-label" for="">Data kursu <small>2 weekend - koniec</small></label>
         <div class="col-md-10">
-          <input type="date" name="deteSecondEnd" class="form-control" [(ngModel)]="course.dateSecondEnd">
+          <input type="date" name="dateSecondEnd" class="form-control" [(ngModel)]="course.dateSecondEnd">
         </div>
       </div>
       <div class="clearfix"></div>
@@ -64,17 +65,17 @@
         <div class="col-md-10">
           <select name="chef" class="form-control" [(ngModel)]="course.chef">
             <option value=""></option>
-            <option  *ngFor="let user of users" [value]="user._id">{{user.name}} {{user.surname}}</option>
+            <option  *ngFor="let user of users | chef" [value]="user._id">{{user.name}} {{user.surname}}</option>
           </select>
         </div>
       </div>
       <div class="clearfix"></div>
-      
-      <div class="form-group" *ngIf="users">
+   
+      <div class="form-group" *ngIf="users && course.chef">
         <label class="col-md-2 control-label" for="">Instruktorzy <small>z ctrl ;-)</small></label>
         <div class="col-md-10">
           <select name="instructors" class="form-control" multiple="true" [(ngModel)]="course.instructors">
-            <option  *ngFor="let user of users | chef: '1'" [value]="user._id">{{user.name}} {{user.surname}}</option>
+            <option  *ngFor="let user of users | disableSelectedChef: course.chef" [value]="user._id">{{user.name}} {{user.surname}}</option>
           </select>
         </div>
       </div>

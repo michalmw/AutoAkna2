@@ -48,6 +48,22 @@ export class EditUserComponent implements OnInit {
 
   }
 
+  canSee() {
+    if(this.user._id == localStorage.getItem('id'))
+      return true;
+    else
+      return false;
+  }
+
+  canChange() {
+    if(this.user._id == localStorage.getItem('id')) {
+      console.log('tutaj')
+      return false;
+      
+    } else
+      return true;
+  }
+
   private getUser() {
     this.usersService.getUser(this.id)
       .subscribe( (user: User) => this.user = user);

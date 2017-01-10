@@ -6,7 +6,7 @@ export interface Courses {
     
     dateFirstStart?: string;
     dateFirstEnd?: string;
-    deteSecondStart?: string;
+    dateSecondStart?: string;
     dateSecondEnd?: string
     place?: string;
     organizer?: string;

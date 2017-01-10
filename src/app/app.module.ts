@@ -2,8 +2,6 @@
 import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { DropdownModule } from 'ng2-bootstrap/ng2-bootstrap';
 
-
-
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -26,8 +24,7 @@ import { CoursesService } from './courses/courses.service';
 import './rxjs-extensions';
 
 import { ChefPipe } from './courses/course/chef.pipe';
-
-
+import { DisableSelectedChefPipe } from './courses/course/disable-selected-chef.pipe';
 
 
 
@@ -37,7 +34,8 @@ import { ChefPipe } from './courses/course/chef.pipe';
     AppComponent,
     HeaderNavbarComponent,
     routableComponents,
-    ChefPipe
+    ChefPipe,
+    DisableSelectedChefPipe
   ],
   imports: [
     AlertModule,  
@@ -56,4 +54,5 @@ import { ChefPipe } from './courses/course/chef.pipe';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}
