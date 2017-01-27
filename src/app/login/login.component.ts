@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
-import { AlertModule } from 'ng2-bootstrap/components/alert';
+import { AlertModule } from 'ng2-bootstrap';
 import { Router } from '@angular/router';
 import { User } from '../users/user';
 
@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login();
     localStorage.setItem('id', user._id);
     localStorage.setItem('Imie', user.name + ' ' + user.surname);
+    localStorage.setItem('Klasa', user.class);
     this.router.navigate(['/user', user._id]);
   }
 

@@ -1,6 +1,6 @@
 
-import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
-import { DropdownModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { AlertModule } from 'ng2-bootstrap/alert';
+import { DropdownModule } from 'ng2-bootstrap/dropdown';
 
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -24,6 +24,7 @@ import { CoursesService } from './courses/courses.service';
 import './rxjs-extensions';
 
 import { ChefPipe } from './courses/course/chef.pipe';
+import { PrivilegePipe } from './courses/course/privilege.pipe';
 import { DisableSelectedChefPipe } from './courses/course/disable-selected-chef.pipe';
 
 
@@ -35,11 +36,12 @@ import { DisableSelectedChefPipe } from './courses/course/disable-selected-chef.
     HeaderNavbarComponent,
     routableComponents,
     ChefPipe,
+    PrivilegePipe,
     DisableSelectedChefPipe
   ],
   imports: [
     AlertModule,  
-    DropdownModule,  
+    DropdownModule.forRoot(),  
     BrowserModule,
     FormsModule,
     HttpModule,

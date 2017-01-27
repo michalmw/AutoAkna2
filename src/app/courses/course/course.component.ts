@@ -21,6 +21,33 @@ export class CourseComponent implements OnInit {
   course: Courses;
   users: User[];
   isEditAble: Boolean = false;
+  userPrivilage :string;
+
+  coursesType = [
+    {
+      name: '',
+      value: '',
+      privilege: 'C'
+    },
+    {
+      name: 'KPPP',
+      value: 'KPPP',
+      privilege: 'A'
+    }, {
+      name: 'SKPP',
+      value: 'SKPP',
+      privilage: 'C'
+    }, {
+      name: '16h',
+      value: '16 KPP',
+      privilage: 'B'
+    }, {
+      name: 'WKPP',
+      value: 'WKPP',
+      privilage: 'B'
+    }
+
+  ]
 
   constructor(
     private coursesService: CoursesService,
@@ -54,7 +81,8 @@ export class CourseComponent implements OnInit {
         );
 
 
-    
+    this.userPrivilage = localStorage.getItem('Klasa');
+ 
    
   }
 

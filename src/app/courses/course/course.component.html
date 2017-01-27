@@ -10,11 +10,9 @@
         <label class="control-label col-md-2">Rodzaj</label>
         <div class="col-md-10">
           <select class="form-control" name="type" id="" [(ngModel)]="course.type">
-            <option value=""></option>
-            <option value="KPPP">KPPP</option>
-            <option value="SKPP">SKPP</option>
-            <option value="16h">16h KPP</option>
-            <option value="WKPP">WKPP</option>
+            <option *ngFor="let course of coursesType | privilege: userPrivilage" [value]="course.value">
+              {{course.name}}              
+            </option>
           </select>
         </div>
       </div>
